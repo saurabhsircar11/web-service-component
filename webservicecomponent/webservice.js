@@ -11,22 +11,6 @@ function timeout(ms, promise) {
 }
 
 
-function getHeader(authorizationCode, acceptType, contentType) {
-    if (authorizationCode.length > 0) {
-        return {
-            'Accept': acceptType,
-            'Content-Type': contentType,
-            'Authorization': authorizationCode
-        }
-    }
-    else {
-        return {
-            'Accept': acceptType,
-            'Content-Type': contentType
-        }
-    }
-}
-
 function responseProcessing(response) {
     var responseAfterChecking = checkingResponse(response)
     if (responseAfterChecking !== null) {
@@ -37,9 +21,8 @@ function responseProcessing(response) {
     }
 }
 
-function webServicePost(timeoutInMs, queryStringBody, url, authorizationCode, contentType, acceptType) {
-    var headerJson = getHeader(authorizationCode, acceptType, contentType);
-    return timeout(timeoutInMs, fetch(url, {
+function webServicePost(timeoutInMs, queryStringBody, url, headerJson) {
+    timeout(timeoutInMs, fetch(url, {
         method: 'POST',
         headers: headerJson,
         body: queryStringBody,
@@ -50,9 +33,8 @@ function webServicePost(timeoutInMs, queryStringBody, url, authorizationCode, co
     })
 }
 
-function webServiceGet(timeoutInMs, queryString, url, authorizationCode, acceptType, contentType, isQuestionMark) {
+function webServiceGet(timeoutInMs, queryString, url, headerJson, isQuestionMark) {
     isQuestionMark = isQuestionMark || false
-    var headerJson = getHeader(authorizationCode, acceptType, contentType)
     return timeout(timeoutInMs, fetch(url + (isQuestionMark ? '?' : '/') + queryString, {
         method: 'GET',
         headers: headerJson,
@@ -66,8 +48,7 @@ function webServiceGet(timeoutInMs, queryString, url, authorizationCode, acceptT
 }
 
 
-function webServiceDelete(timeoutInMs, queryString, url, authorizationCode, acceptType, contentType) {
-    var headerJson = getHeader(authorizationCode, acceptType, contentType)
+function webServiceDelete(timeoutInMs, queryString, url, headerJson) {
     return timeout(timeoutInMs, fetch(url + '/' + queryString, {
         method: 'DELETE',
         headers: headerJson,
@@ -81,8 +62,7 @@ function webServiceDelete(timeoutInMs, queryString, url, authorizationCode, acce
 }
 
 
-function webServicePut(timeoutInMs, queryStringUrl, queryStringBody, url, authorizationCode, contentType, acceptType) {
-    var headerJson = getHeader(authorizationCode, acceptType, contentType)
+function webServicePut(timeoutInMs, queryStringUrl, queryStringBody, url, headerJson) {
     return timeout(timeoutInMs, fetch(url + '/' + queryStringUrl, {
         method: 'PUT',
         headers: headerJson,
