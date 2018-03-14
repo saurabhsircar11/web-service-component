@@ -36,6 +36,7 @@ function responseHandlerForScreen(response, callBackMethods) {
                 callBackMethods['default']()
             }
             break;
-
     }
 }
+
+module.exports = responseHandlerForScreen
