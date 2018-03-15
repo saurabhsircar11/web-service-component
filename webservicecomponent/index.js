@@ -31,6 +31,7 @@ function hitApi(jsonParams, method, callbackMethods, errorCallbackMethods) {
             webService.webServicePut(jsonParams).then(function (response) {
                 responseHandle(response, callbackMethods, errorCallbackMethods);
             })
+            break;
         default:
             break;
     }

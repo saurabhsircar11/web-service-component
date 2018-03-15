@@ -13,22 +13,22 @@ function timeout(ms, promise) {
 function optionMaker(jsonParams, method) {
     var options = {}
     options['methods'] = method
-    if (!jsonParams.hasOwnProperty('cache')) {
+    if (jsonParams.hasOwnProperty('cache')) {
         options['cache'] = jsonParams.cache.length > 0 ? jsonParams.cache : 'default'
     }
-    if (!jsonParams.hasOwnProperty('credentials')) {
+    if (jsonParams.hasOwnProperty('credentials')) {
         options['credentials'] = jsonParams.credentials.length > 0 ? jsonParams.credentials : 'omit'
     }
-    if (!jsonParams.hasOwnProperty('mode')) {
+    if (jsonParams.hasOwnProperty('mode')) {
         options['mode'] = jsonParams.mode.length > 0 ? jsonParams.mode : 'same-origin'
     }
-    if (!jsonParams.hasOwnProperty('redirect')) {
+    if (jsonParams.hasOwnProperty('redirect')) {
         options['redirect'] = jsonParams.redirect.length > 0 ? jsonParams.redirect : 'manual'
     }
-    if (!jsonParams.hasOwnProperty('referrer')) {
+    if (jsonParams.hasOwnProperty('referrer')) {
         options['referrer'] = jsonParams.referrer.length > 0 ? jsonParams.referrer : 'client'
     }
-    if (!jsonParams.hasOwnProperty('queryStringBody')) {
+    if (jsonParams.hasOwnProperty('queryStringBody')) {
         options['queryStringBody'] = jsonParams.queryStringBody.length > 0 ? jsonParams.queryStringBody : ''
     }
     options['headers'] = jsonParams.headerJson
