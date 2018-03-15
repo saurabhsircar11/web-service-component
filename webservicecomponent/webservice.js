@@ -1,6 +1,5 @@
 var checkingResponse = require('./checkresponse')
 
-
 function timeout(ms, promise) {
     return new Promise(function (resolve, reject) {
         setTimeout(function () {
@@ -8,6 +7,15 @@ function timeout(ms, promise) {
         }, ms)
         promise.then(resolve, reject)
     })
+}
+
+function errorValidation(error) {
+    if (error.message === "Connection timed out") {
+        return false
+    }
+    else {
+        return true
+    }
 }
 
 function optionMaker(jsonParams, method) {
@@ -48,8 +56,13 @@ function responseProcessing(response) {
 function webServicePost(jsonParams) {
     return timeout(jsonParams.timeoutInMs, fetch(jsonParams.url, optionMaker(jsonParams, 'POST'))).then(function (response) {
         return responseProcessing(response)
-    }).catch(function () {
-        return null
+    }).catch(function (error) {
+        if (errorValidation(error)) {
+            throw new Error(error)
+        }
+        else {
+            return null
+        }
     })
 }
 
@@ -57,7 +70,12 @@ function webServiceGet(jsonParams) {
     return timeout(jsonParams.timeoutInMs, fetch(jsonParams.url + jsonParams.queryStringUrl, optionMaker(jsonParams, 'GET'))).then(function (response) {
         return responseProcessing(response);
     }).catch(function () {
-            return null
+            if (errorValidation(error)) {
+                throw new Error(error)
+            }
+            else {
+                return null
+            }
         }
     )
         ;
@@ -68,7 +86,12 @@ function webServiceDelete(jsonParams) {
     return timeout(jsonParams.timeoutInMs, fetch(jsonParams.url + jsonParams.queryStringUrl, optionMaker(jsonParams, 'DELETE'))).then(function (response) {
         return responseProcessing(response)
     }).catch(function () {
-            return null
+            if (errorValidation(error)) {
+                throw new Error(error)
+            }
+            else {
+                return null
+            }
         }
     )
         ;
@@ -80,8 +103,12 @@ function webServicePut(jsonParams) {
         jsonParams.queryStringUrl, optionMaker(jsonParams, 'PUT'))).then(function (response) {
         return responseProcessing(response);
     }).catch(function () {
-        return null
-
+        if (errorValidation(error)) {
+            throw new Error(error)
+        }
+        else {
+            return null
+        }
     });
 }
 
