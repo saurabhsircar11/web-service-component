@@ -14,7 +14,7 @@ Works for both react and react-native
 
   Example for get request
 
-
+     //need to add queryStringBody for post request
      const jsonParams = {
         timeoutInMs: 5000,
         queryStringUrl: '',//if any query string is there, you need to add ? for query string
