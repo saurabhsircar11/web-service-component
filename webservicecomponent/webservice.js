@@ -10,6 +10,30 @@ function timeout(ms, promise) {
     })
 }
 
+function optionMaker(jsonParams, method) {
+    var options = {}
+    options['methods'] = method
+    if (!jsonParams.hasOwnProperty('cache')) {
+        options['cache'] = jsonParams.cache.length > 0 ? jsonParams.cache : 'default'
+    }
+    if (!jsonParams.hasOwnProperty('credentials')) {
+        options['credentials'] = jsonParams.credentials.length > 0 ? jsonParams.credentials : 'omit'
+    }
+    if (!jsonParams.hasOwnProperty('mode')) {
+        options['mode'] = jsonParams.mode.length > 0 ? jsonParams.mode : 'same-origin'
+    }
+    if (!jsonParams.hasOwnProperty('redirect')) {
+        options['redirect'] = jsonParams.redirect.length > 0 ? jsonParams.redirect : 'manual'
+    }
+    if (!jsonParams.hasOwnProperty('referrer')) {
+        options['referrer'] = jsonParams.referrer.length > 0 ? jsonParams.referrer : 'client'
+    }
+    if (!jsonParams.hasOwnProperty('queryStringBody')) {
+        options['queryStringBody'] = jsonParams.queryStringBody.length > 0 ? jsonParams.queryStringBody : ''
+    }
+    options['headers'] = jsonParams.headerJson
+    return options
+}
 
 function responseProcessing(response) {
     var responseAfterChecking = checkingResponse(response)
@@ -21,24 +45,16 @@ function responseProcessing(response) {
     }
 }
 
-function webServicePost(timeoutInMs, queryStringBody, url, headerJson) {
-    timeout(timeoutInMs, fetch(url, {
-        method: 'POST',
-        headers: headerJson,
-        body: queryStringBody,
-    })).then(function (response) {
+function webServicePost(jsonParams) {
+    return timeout(jsonParams.timeoutInMs, fetch(jsonParams.url, optionMaker(jsonParams, 'POST'))).then(function (response) {
         return responseProcessing(response)
     }).catch(function () {
         return null
     })
 }
 
-function webServiceGet(timeoutInMs, queryString, url, headerJson, isQuestionMark) {
-    isQuestionMark = isQuestionMark || false
-    return timeout(timeoutInMs, fetch(url + (isQuestionMark ? '?' : '/') + queryString, {
-        method: 'GET',
-        headers: headerJson,
-    })).then(function (response) {
+function webServiceGet(jsonParams) {
+    return timeout(jsonParams.timeoutInMs, fetch(jsonParams.url + jsonParams.queryStringUrl, optionMaker(jsonParams, 'GET'))).then(function (response) {
         return responseProcessing(response);
     }).catch(function () {
             return null
@@ -48,11 +64,8 @@ function webServiceGet(timeoutInMs, queryString, url, headerJson, isQuestionMark
 }
 
 
-function webServiceDelete(timeoutInMs, queryString, url, headerJson) {
-    return timeout(timeoutInMs, fetch(url + '/' + queryString, {
-        method: 'DELETE',
-        headers: headerJson,
-    })).then(function (response) {
+function webServiceDelete(jsonParams) {
+    return timeout(jsonParams.timeoutInMs, fetch(jsonParams.url + jsonParams.queryStringUrl, optionMaker(jsonParams, 'DELETE'))).then(function (response) {
         return responseProcessing(response)
     }).catch(function () {
             return null
@@ -62,12 +75,9 @@ function webServiceDelete(timeoutInMs, queryString, url, headerJson) {
 }
 
 
-function webServicePut(timeoutInMs, queryStringUrl, queryStringBody, url, headerJson) {
-    return timeout(timeoutInMs, fetch(url + '/' + queryStringUrl, {
-        method: 'PUT',
-        headers: headerJson,
-        body: queryStringBody,
-    })).then(function (response) {
+function webServicePut(jsonParams) {
+    return timeout(jsonParams.timeoutInMs, fetch(jsonParams.url +
+        jsonParams.queryStringUrl, optionMaker(jsonParams, 'PUT'))).then(function (response) {
         return responseProcessing(response);
     }).catch(function () {
         return null

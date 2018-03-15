@@ -1,44 +1,38 @@
 var webService = require('./webservice')
 var responseHandlerForScreen = require('./responseHandlerForScreen')
 
+function responseHandle(response, callbackMethods, errorCallbackMethods) {
+    if (response !== null) {
+        responseHandlerForScreen(response, callbackMethods)
+    } else {
+        errorCallbackMethods()
+    }
+}
+
 function hitApi(jsonParams, method, callbackMethods, errorCallbackMethods) {
     switch (method) {
         case 'GET':
-            webService.webServiceGet(jsonParams.timeoutInMs, jsonParams.queryString, jsonParams.url, jsonParams.headerJson, jsonParams.isQuestionMark).then(function (response) {
-                if (response !== null) {
-                    responseHandlerForScreen(response, callbackMethods)
-                } else {
-                    errorCallbackMethods()
-                }
+            webService.webServiceGet(jsonParams).then(function (response) {
+                responseHandle(response, callbackMethods, errorCallbackMethods);
             })
             break;
 
         case 'POST':
-            webService.webServicePost(jsonParams.timeoutInMs, jsonParams.queryStringBody, jsonParams.url, jsonParams.headerJson).then(function (response) {
-                if (response !== null) {
-                    responseHandlerForScreen(response, callbackMethods)
-                } else {
-                    errorCallbackMethods()
-                }
+            webService.webServicePost(jsonParams).then(function (response) {
+                responseHandle(response, callbackMethods, errorCallbackMethods);
             })
             break;
         case 'DELETE':
-            webService.webServiceDelete(jsonParams.timeoutInMs, jsonParams.queryString, jsonParams.url, jsonParams.headerJson).then(function (response) {
-                if (response !== null) {
-                    responseHandlerForScreen(response, callbackMethods)
-                } else {
-                    errorCallbackMethods()
-                }
+            webService.webServiceDelete(jsonParams).then(function (response) {
+                responseHandle(response, callbackMethods, errorCallbackMethods);
             })
             break;
         case 'PUT':
-            webService.webServicePut(jsonParams.timeoutInMs, jsonParams.queryString, jsonParams.queryStringBody, jsonParams.url, jsonParams.headerJson).then(function (response) {
-                if (response !== null) {
-                    responseHandlerForScreen(response, callbackMethods)
-                } else {
-                    errorCallbackMethods()
-                }
+            webService.webServicePut(jsonParams).then(function (response) {
+                responseHandle(response, callbackMethods, errorCallbackMethods);
             })
+        default:
+            break;
     }
 }
 
