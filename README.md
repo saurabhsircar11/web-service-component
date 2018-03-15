@@ -41,11 +41,12 @@ Works for both react and react-native
               alert('hi2')
             }
           };
-   //for handling where response is null and you need show a message to user.(Response null can happen due to timeout, if there is an error in fetch it gives an error)
-     const errorCallbackMethods = () => {
+
+      //for handling where response is null and you need show a message to user.(Response null can happen due to timeout, if there is an error in fetch it gives an error)
+      const errorCallbackMethods = () => {
         alert('response was null')
       };
-    hitApi(jsonParams, method, callBack, errorCallbackMethods);
+      hitApi(jsonParams, method, callBack, errorCallbackMethods);
 
 
 
