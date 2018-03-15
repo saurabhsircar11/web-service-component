@@ -37,7 +37,7 @@ function optionMaker(jsonParams, method) {
         options['referrer'] = jsonParams.referrer.length > 0 ? jsonParams.referrer : 'client'
     }
     if (jsonParams.hasOwnProperty('queryStringBody')) {
-        options['queryStringBody'] = jsonParams.queryStringBody.length > 0 ? jsonParams.queryStringBody : ''
+        options['body'] = jsonParams.queryStringBody.length > 0 ? jsonParams.queryStringBody : ''
     }
     options['headers'] = jsonParams.headerJson
     return options
