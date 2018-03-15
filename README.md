@@ -4,8 +4,10 @@ It helps in handling various response code and actions to be performed for the r
 Works for both react and react-native
 
 ## Getting Started
-#1. Import function in your file
-   import hitApi from '../webservicecomponent'
+
+   #1. Import function in your file
+
+       import hitApi from '../webservicecomponent'
 
 
 #2.Usage of the library
