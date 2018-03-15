@@ -11,6 +11,8 @@ Works for both react and react-native
 #2.Usage of the library
 
   Example for get request
+
+
      const jsonParams = {
         timeoutInMs: 5000,
         queryStringUrl: '',//if any query string is there, you need to add ? for query string
