@@ -9,8 +9,9 @@ Works for both react and react-native
 
 
 #2.Usage of the library
+
   Example for get request
-  const jsonParams = {
+     const jsonParams = {
         timeoutInMs: 5000,
         queryStringUrl: '',//if any query string is there, you need to add ? for query string
         url: url,
@@ -22,8 +23,9 @@ Works for both react and react-native
         redirect: 'follow',// Can be changed to your need
       };
 
-  const method = 'GET';
-  const callBack = {
+     const method = 'GET';
+
+     const callBack = {
             case1: (response) => {
               response.json().then((data) => {
                 alert(JSON.stringify(data))
@@ -38,10 +40,10 @@ Works for both react and react-native
             }
           };
    //for handling where response is null and you need show a message to user.(Response null can happen due to timeout, if there is an error in fetch it gives an error)
-  const errorCallbackMethods = () => {
+     const errorCallbackMethods = () => {
         alert('response was null')
       };
-  hitApi(jsonParams, method, callBack, errorCallbackMethods);
+    hitApi(jsonParams, method, callBack, errorCallbackMethods);
 
 
 
