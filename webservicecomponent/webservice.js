@@ -20,7 +20,7 @@ function errorValidation(error) {
 
 function optionMaker(jsonParams, method) {
     var options = {}
-    options['methods'] = method
+    options['method'] = method
     if (jsonParams.hasOwnProperty('cache')) {
         options['cache'] = jsonParams.cache.length > 0 ? jsonParams.cache : 'default'
     }
