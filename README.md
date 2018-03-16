@@ -61,7 +61,7 @@ Works for both react and react-native
    Clone the repo for now, it not on npm yet
 
 
-###Limitations
+### Limitations
 
     This library uses fetch call internally so normal rules to fetch apply
 
