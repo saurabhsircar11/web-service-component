@@ -51,13 +51,13 @@ Works for both react and react-native
       hitApi(jsonParams, method, callBack, errorCallbackMethods);
    Cases handled so for:
    
-      case 200: 1
-      case 401: 2
-      case 400: 3       
-      case 404: 7
-      case 201: 4            
-      case 204: 5        
-      case 409: 6        
+      case1: 200
+      case2: 401
+      case3: 400       
+      case4: 404
+      case5: 201            
+      case6: 204       
+      case7: 409        
       
 
 
