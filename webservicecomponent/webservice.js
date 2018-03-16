@@ -69,7 +69,7 @@ function webServicePost(jsonParams) {
 function webServiceGet(jsonParams) {
     return timeout(jsonParams.timeoutInMs, fetch(jsonParams.url + jsonParams.queryStringUrl, optionMaker(jsonParams, 'GET'))).then(function (response) {
         return responseProcessing(response);
-    }).catch(function () {
+    }).catch(function (error) {
             if (errorValidation(error)) {
                 throw new Error(error)
             }
@@ -85,7 +85,7 @@ function webServiceGet(jsonParams) {
 function webServiceDelete(jsonParams) {
     return timeout(jsonParams.timeoutInMs, fetch(jsonParams.url + jsonParams.queryStringUrl, optionMaker(jsonParams, 'DELETE'))).then(function (response) {
         return responseProcessing(response)
-    }).catch(function () {
+    }).catch(function (error) {
             if (errorValidation(error)) {
                 throw new Error(error)
             }
@@ -102,7 +102,7 @@ function webServicePut(jsonParams) {
     return timeout(jsonParams.timeoutInMs, fetch(jsonParams.url +
         jsonParams.queryStringUrl, optionMaker(jsonParams, 'PUT'))).then(function (response) {
         return responseProcessing(response);
-    }).catch(function () {
+    }).catch(function (error) {
         if (errorValidation(error)) {
             throw new Error(error)
         }
