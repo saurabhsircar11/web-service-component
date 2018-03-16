@@ -49,8 +49,16 @@ Works for both react and react-native
         alert('response was null')
       };
       hitApi(jsonParams, method, callBack, errorCallbackMethods);
-
-
+   Cases handled so for:
+   
+      case 200: 1
+      case 401: 2
+      case 400: 3       
+      case 404: 7
+      case 201: 4            
+      case 204: 5        
+      case 409: 6        
+      
 
 
 ### Prerequisites

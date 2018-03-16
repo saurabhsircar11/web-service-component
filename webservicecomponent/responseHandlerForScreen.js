@@ -38,7 +38,7 @@ function responseHandlerForScreen(response, callBackMethods) {
             break;
         default:
             if (callBackMethods.hasOwnProperty('default')) {
-                callBackMethods['default'](response.response)
+                callBackMethods['default']()
             }
             break;
     }
