@@ -60,6 +60,9 @@ Works for both react and react-native
 ### Installing
    Clone the repo for now, it not on npm yet
 
+###Limitations
+   This library uses fetch call internally so normal rules to fetch apply
+
 
 ## License
 
